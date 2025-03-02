@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resu-Craft</title>
+    <link rel="icon" type="image/x-icon" href="/assets/file-earmark-code.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+</head>
+<body class="bg-gray-50 p-4 font-serif">
+
+    <!-- Header Container -->
+    <div class="w-full mx-auto mt-6 mb-6">
+        <h1 class="text-5xl font-bold font-serif text-black">Resu-Craft</h1>
+        <p class="text-lg text-gray-600 mt-2">Build a simple resume in just a few minutes with our user-friendly resume builder.</p>
+    </div>
+    
+    <div class="mx-auto grid grid-cols-1 md:grid-cols-2 gap-3">
+
+        <!-- Left Side: Input Form -->
+        <div class="bg-white p-3 shadow-md rounded-lg">
+        <!-- Navigation Tabs -->
+        <div class="flex flex-wrap border-b mb-3 text-sm">
+            <button class="tab flex-grow px-3 py-2 text-black font-bold border-b-2 border-black focus:outline-none hover:text-gray-400" data-tab="personal">Personal</button>
+            <button class="tab flex-grow px-3 py-2 text-black font-bold border-b-2 border-black focus:outline-none hover:text-gray-400" data-tab="experience">Experience</button>
+            <button class="tab flex-grow px-3 py-2 text-black font-bold border-b-2 border-black focus:outline-none hover:text-gray-400" data-tab="education">Education</button>
+            <button class="tab flex-grow px-3 py-2 text-black font-bold border-b-2 border-black focus:outline-none hover:text-gray-400" data-tab="skills">Skills</button>
+        </div>
+            
+            <!-- Form Sections -->
+            <div id="formContainer">
+                <!-- Personal Information -->
+                <div class="tab-content" id="personal">
+                    <h2 class="text-lg font-semibold mb-2">Personal Information</h2>
+                    <label class="block text-sm">Full Name</label>
+                    <input type="text" id="name" class="w-full border p-2 rounded mb-3 text-sm uppercase">
+
+                    <label class="block text-sm">Email</label>
+                    <input type="email" id="email" class="w-full border p-2 rounded mb-3 text-sm">
+                    
+                    <label class="block text-sm">Phone</label>
+                    <input type="text" id="phone" class="w-full border p-2 rounded mb-3 text-sm">
+                    
+                    <label class="block text-sm">Location</label>
+                    <input type="text" id="location" class="w-full border p-2 rounded mb-3 text-sm">
+                    
+                    <label class="block text-sm">Summary</label>
+                    <textarea id="summary" class="w-full border p-2 rounded text-sm"></textarea>
+                </div>
+
+                <!-- Experience -->
+                <div class="tab-content hidden" id="experience">
+
+                    <div class="flex justify-between items-center">
+                    <h2 class="text-lg font-semibold">Experience</h2> 
+                    <button id="addExperience" class="bg-black text-white px-3 py-2 rounded text-sm hover:bg-gray-600">Add Experience</button>
+                    </div>
+                    
+                    <label class="block text-sm">Company</label>
+                    <input type="text" id="company" class="w-full border p-2 rounded mb-3 text-sm">
+                    
+                    <label class="block text-sm">Position</label>
+                    <input type="text" id="position" class="w-full border p-2 rounded mb-3 text-sm">
+                    
+                    <div class="flex gap-3">
+                        <div class="w-1/2">
+                            <label class="block text-sm">Start Date</label>
+                            <input type="date" id="startDate" class="w-full border p-2 rounded text-sm">
+                        </div>
+                        <div class="w-1/2">
+                            <label class="block text-sm">End Date</label>
+                            <input type="date" id="endDate" class="w-full border p-2 rounded text-sm">
+                        </div>
+                    </div>
+                    
+                    <label class="block text-sm flex items-center mt-2">
+                        <input type="checkbox" id="currentlyWorking" class="mr-1"> Currently working here
+                    </label>
+                    
+                    <label class="block text-sm mt-2">Job Description</label>
+                    <textarea id="jobDescription" class="w-full border p-2 rounded text-sm"></textarea>
+
+                </div>
+
+                <!-- Education -->
+                <div class="tab-content hidden" id="education">
+
+                    <div class="flex justify-between items-center">
+                    <h2 class="text-lg font-semibold">Education</h2>
+                    <button id="addEducation" class="bg-black text-white px-3 py-2 rounded text-sm hover:bg-gray-600">Add Education</button>
+                    </div>
+
+                    <label class="block text-sm">School/University</label>
+                    <input type="text" id="school" class="w-full border p-2 rounded mb-3 text-sm">
+                    
+                    <label class="block text-sm">Degree</label>
+                    <input type="text" id="degree" class="w-full border p-2 rounded mb-3 text-sm">
+                    
+                    <div class="flex gap-3">
+                        <div class="w-1/2">
+                            <label class="block text-sm">Start Date</label>
+                            <input type="date" id="eduStartDate" class="w-full border p-2 rounded text-sm">
+                        </div>
+                        <div class="w-1/2">
+                            <label class="block text-sm">End Date</label>
+                            <input type="date" id="eduEndDate" class="w-full border p-2 rounded text-sm">
+                        </div>
+                    </div>
+                    
+                    <label class="block text-sm flex items-center mt-2">
+                        <input type="checkbox" id="currentlyStudying" class="mr-1"> Currently studying here
+                    </label>
+                </div>
+
+                <!-- Skills -->
+                <div class="tab-content hidden" id="skills">
+
+                    <div class="flex justify-between items-center">
+                    <h2 class="text-lg font-semibold">Skills</h2>
+                    <button id="addSkill" class="bg-black text-white px-3 py-2 rounded text-sm hover:bg-gray-600">Add Skill</button>
+                    </div>
+
+                    <div id="skillsContainer">
+                        <div class="flex gap-2 items-center mt-3 mb-3">
+                            <input type="text" id="skillset" class="skill-input w-full border p-2 rounded text-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Live Preview -->
+        <div class="bg-white p-3 shadow-md rounded-lg flex flex-col h-full">
+            <h2 class="text-lg font-semibold mb-3">Resume Preview</h2>
+
+            <div id="resumePreview" class="p-5 text-[11px] font-serif">
+                <!-- Name -->
+                <h1 class="text-sm font-bold uppercase" id="previewName">Full Name</h1>
+                
+                <!-- Contact Info -->
+                <p class="text-black mt-2">
+                    <span id="previewEmail">Email Address</span> |
+                    <span id="previewPhone">Phone Number</span> |
+                    <span id="previewLocation">Location</span>
+                </p>
+                
+                <!-- Summary -->
+                <p class="mt-0" id="previewSummary"><br></p>
+            
+                <!-- Experience Section -->
+                <h2 class="text-[11px] font-bold mt-5">EXPERIENCE</h2>
+                <hr class="my-1 border-black mt-3">
+                <div id="experiencePreview"></div>
+            
+                <!-- Education Section -->
+                <h2 class="text-[11px] font-bold mt-5">EDUCATION</h2>
+                <hr class="my-1 border-black mt-3">
+                <div id="educationPreview"></div>
+            
+                <!-- Skills Section -->
+                <h2 class="text-[11px] font-bold mt-5">SKILLS</h2>
+                <hr class="my-1 border-black mt-3">
+                <div class="flex gap-2 items-center mt-1 mb-3" id="skillPreview"></div>
+            </div>            
+
+            <!-- Make sure button stays at the bottom -->
+            <button id="generatePDF" class="bg-black text-white px-3 py-2 rounded mt-3 text-sm hover:bg-gray-600 mt-auto">Generate PDF</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="pdfscript.js"></script>
+</body>
+</html>
